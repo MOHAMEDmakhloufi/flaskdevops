@@ -21,6 +21,14 @@ pipeline {
                 }
             }
         }
+        stage("Run SonarQube Analysis") {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    // Running SonarQube analysis using sonar-scanner
+                    sh "sonar-scanner -Dsonar.projectKey=your-project-key -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_SCANNER}"
+                }
+            }
+        }
          stage("Run Tests") {
             steps {
                 script {
