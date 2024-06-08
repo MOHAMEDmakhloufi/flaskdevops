@@ -20,7 +20,7 @@ pipeline {
                 }
             }
         }
-         sstage("Run SonarQube Analysis") {
+         stage("Run SonarQube Analysis") {
             steps {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONARQUBE_SCANNER')]) {
                     withSonarQubeEnv('sonarQube') {
