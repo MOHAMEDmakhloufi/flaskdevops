@@ -21,7 +21,24 @@ pipeline {
                 }
             }
         }
+         stage("Run Tests") {
+            steps {
+                script {
+                    // Run the Docker container for testing
+                    def app = sh(script: "docker run -d -p 5000:5000 ${DOCKER_IMAGE}", returnStdout: true).trim()
+                    try {
+                        seleniumTests()
+                    } finally {
+                        // Stop the Docker container
+                        sh "docker stop ${app}"
+                        sh "docker rm ${app}"
+                    }
+                }
+            }
+        }
     }
 }
 
-
+def seleniumTests() {
+     echo "hello tests" 
+}
