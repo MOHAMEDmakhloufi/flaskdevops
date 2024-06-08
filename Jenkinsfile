@@ -3,7 +3,6 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'flask-app:latest'
         SONARQUBE_URL = 'http://localhost:9000'
-        SONARQUBE_SCANNER = 'SonarQubeScanner'
         SELENIUM_GRID_URL = 'http://localhost:4444/wd/hub'
     }
     stages {
@@ -21,11 +20,12 @@ pipeline {
                 }
             }
         }
-        stage("Run SonarQube Analysis") {
+         stage("Run SonarQube Analysis") {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    // Running SonarQube analysis using sonar-scanner
-                    sh "sonar-scanner -Dsonar.projectKey=your-project-key -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_SCANNER}"
+                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONARQUBE_SCANNER')]) {
+                    withSonarQubeEnv('sonarQube') {
+                        sh "sonar-scanner -Dsonar.projectKey=your-project-key -Dsonar.sources=. -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONARQUBE_SCANNER}"
+                    }
                 }
             }
         }
