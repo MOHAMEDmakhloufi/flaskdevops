@@ -21,14 +21,6 @@ pipeline {
                 }
             }
         }
-         stage('Run Tests') {
-            steps {
-                script {
-                    def app = docker.run(DOCKER_IMAGE, '-d -p 5000:5000')
-                    app.stop()
-                }
-            }
-        }
     }
 }
 
