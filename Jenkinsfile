@@ -28,6 +28,7 @@ pipeline {
                     }
                 }
             }
+      }
          stage("Run Tests") {
             steps {
                 script {
