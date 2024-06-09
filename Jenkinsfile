@@ -18,7 +18,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONARQUBE_SCANNER')]) {
                     withSonarQubeEnv(installationName:'sonarQube') {
-                        sh "sonar-scanner "
+                        sh "sonar-scanner --version"
                     }
                 }
             }
