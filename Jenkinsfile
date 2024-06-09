@@ -16,11 +16,7 @@ pipeline {
         
       stage("Run SonarQube Analysis") {
             steps {
-                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONARQUBE_SCANNER')]) {
-                    withSonarQubeEnv(installationName:'sonarQube') {
-                        sh "sonar-scanner --version"
-                    }
-                }
+                 sh "sonar-scanner --version"
             }
       }
 
