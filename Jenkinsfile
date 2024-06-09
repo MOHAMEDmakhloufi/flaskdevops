@@ -16,7 +16,10 @@ pipeline {
         
       stage("Run SonarQube Analysis") {
             steps {
-                 sh "sonar-scanner --version"
+                 script {
+                     sh "sonar-scanner --version"
+                }
+                
             }
       }
 
