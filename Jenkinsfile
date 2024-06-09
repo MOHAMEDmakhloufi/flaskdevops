@@ -28,7 +28,7 @@ pipeline {
                             sonarsource/sonar-scanner-cli \
                             sonar-scanner \
                             -Dsonar.projectKey=your-project-key \
-                            -Dsonar.sources=$(pwd) \
+                            -Dsonar.sources=. \
                             -Dsonar.host.url=${SONARQUBE_URL} \
                             -Dsonar.login=${SONARQUBE_SCANNER}
                         '''
