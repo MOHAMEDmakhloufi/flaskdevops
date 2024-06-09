@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = 'flask-app:latest'
-        SONARQUBE_URL = 'http://192.168.1.20:9000/'
+        SONARQUBE_URL = 'http://192.168.1.21:9000/'
         SELENIUM_GRID_URL = 'http://localhost:4444/wd/hub'
         SONAR_SCANNER_HOME = '/opt/sonar-scanner' // Assuming SonarQube Scanner is installed here
         PATH = "${SONAR_SCANNER_HOME}/bin:${env.PATH}"
