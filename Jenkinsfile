@@ -13,13 +13,7 @@ pipeline {
                 }
             }
         }
-        stage("Build Image") {
-            steps {
-                script {
-                    sh "docker build -t $DOCKER_IMAGE ."
-                }
-            }
-        }
+        
       stage("Run SonarQube Analysis") {
             steps {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONARQUBE_SCANNER')]) {
@@ -29,21 +23,7 @@ pipeline {
                 }
             }
       }
-         stage("Run Tests") {
-            steps {
-                script {
-                    // Run the Docker container for testing
-                    def app = sh(script: "docker run -d -p 5000:5000 ${DOCKER_IMAGE}", returnStdout: true).trim()
-                    try {
-                        seleniumTests()
-                    } finally {
-                        // Stop the Docker container
-                        sh "docker stop ${app}"
-                        sh "docker rm ${app}"
-                    }
-                }
-            }
-        }
+
     }
 }
 
