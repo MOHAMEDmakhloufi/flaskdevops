@@ -11,7 +11,7 @@ pipeline {
         stage("Init") {
             steps {
                 script {
-                    echo "ls"
+                    sh "ls"
                 }
             }
         }
